@@ -1,0 +1,73 @@
+version: '3.7'
+services:
+  client:
+    image: node:lts
+    working_dir: /app
+    volumes:
+      - ./client:/app
+      - ./client/node_modules:/app/node_modules
+    ports:
+      - "3000:3000"
+    command: >
+      sh -c "npm install && npm run start"
+    depends_on:
+      - server
+    networks:
+      - network
+  server:
+    image: node:lts
+    working_dir: /app
+    volumes:
+      - ./server:/app
+      - ./server/node_modules:/app/node_modules
+    ports:
+      - "5002:5002"
+    command: >
+      sh -c "npm install -g @nestjs/cli && npm install && npm run start:dev"
+    depends_on:
+      - db
+    networks:
+      - network
+  db:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    volumes:
+      - db-data:/data/db
+    networks:
+      - network
+
+  mongo-express:
+    image: mongo-express
+    links:
+      - db
+    ports:
+      - 8081:8081
+    healthcheck:
+      test:  ["CMD", "docker-healthcheck"]
+      interval: 150s
+      timeout: 2s
+      retries: 10
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_SERVER: db
+      MONGO_INITDB_ROOT_PASSWORD: appfellas
+      MONGO_INITDB_ROOT_USERNAME: appfellas
+      MONGO_INITDB_DATABASE: appfellas
+      ME_CONFIG_BASICAUTH: false
+    depends_on:
+      - db
+    networks:
+      - network
+
+volumes:
+  db-data:
+  pgadmin-data:
+  node_modules:
+
+networks:
+  network:
