@@ -7,7 +7,7 @@ import * as bcrypt from 'bcryptjs';
 export class AuthService {
   constructor(
     private userService: UsersService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
   ) {}
 
   async validateUser(username: string, pass: string): Promise<any> {
@@ -31,6 +31,7 @@ export class AuthService {
     console.log('Creating token with payload:', payload);
     return {
       access_token: this.jwtService.sign(payload),
+      user: user._id,
     };
   }
 }

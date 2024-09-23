@@ -11,8 +11,10 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    DatabaseInitModule,
-    MongooseModule.forRoot('mongodb://appfellas:appfellas@db:27017/appfellas'),
+    MongooseModule.forRoot(
+      'mongodb://appfellas:appfellas@db:27017/appfellas?authSource=admin',
+    ),
+    // DatabaseInitModule,
     HttpModule.register({
       timeout: 5000,
       maxRedirects: 5,
