@@ -31,8 +31,8 @@ services:
   db:
     image: mongo
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME: appfellas
+      MONGO_INITDB_ROOT_PASSWORD: appfellas
     ports:
       - "27017:27017"
     volumes:
@@ -52,12 +52,9 @@ services:
       timeout: 2s
       retries: 10
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_ADMINUSERNAME: appfellas  
+      ME_CONFIG_MONGODB_ADMINPASSWORD: appfellas
       ME_CONFIG_MONGODB_SERVER: db
-      MONGO_INITDB_ROOT_PASSWORD: appfellas
-      MONGO_INITDB_ROOT_USERNAME: appfellas
-      MONGO_INITDB_DATABASE: appfellas
       ME_CONFIG_BASICAUTH: false
     depends_on:
       - db
