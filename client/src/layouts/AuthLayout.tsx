@@ -13,7 +13,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
         <div className="mt-4">{children}</div>
         <div className="mt-4 text-center text-gray-600">
           <Link to="/" className="hover:underline">
-            Back to Home
+            Back to Home"
           </Link>
         </div>
       </div>

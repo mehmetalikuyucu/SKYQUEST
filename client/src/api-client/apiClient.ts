@@ -7,6 +7,12 @@ export const setToken = (token: string) =>
 
 export const removeToken = () => localStorage.removeItem("authToken");
 
+// Özel yönlendirme fonksiyonu
+let navigate: (path: string) => void;
+export const setNavigate = (nav: (path: string) => void) => {
+  navigate = nav;
+};
+
 const apiClient: AxiosInstance = axios.create({
   baseURL: "http://localhost:5002",
   headers: {
@@ -29,8 +35,14 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
+      console.log(error);
       removeToken();
-      window.location.href = "/login";
+      if (navigate) {
+        navigate("/auth");
+      } else {
+        console.warn("Navigate function is not set. Falling back to window.location.");
+        window.location.href = "/auth";
+      }
     }
     return Promise.reject(error);
   }

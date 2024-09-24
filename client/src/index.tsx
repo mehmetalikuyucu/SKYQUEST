@@ -4,6 +4,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Router from "./router/Router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -13,7 +14,9 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <Router />
+      <Toaster/>
     </QueryClientProvider>
+
   </React.StrictMode>
 );
 

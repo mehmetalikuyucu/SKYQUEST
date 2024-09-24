@@ -8,7 +8,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
   const { isAuthenticated } = useAuthStore();
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/auth" replace />;
   }
   return <>{children}</>;
 };

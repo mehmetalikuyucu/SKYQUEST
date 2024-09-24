@@ -1,8 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
-import { apiClient, setToken } from "../api-client/apiClient";
+import { apiClient, setToken } from "../../api-client/apiClient";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 interface LoginData {
   username: string;
@@ -14,29 +15,27 @@ interface LoginProps {
 }
 
 const Login: React.FC<LoginProps> = ({ onSwitchToRegister }) => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginData>();
 
-  const { isPending, mutate } = useMutation({
+  const { reset,isPending, mutate } = useMutation({
     mutationFn: (data: LoginData) => apiClient.post("/auth/login", data),
     onSuccess: (response) => {
       setToken(response.data.access_token);
       toast.success("Giriş başarılı");
-      window.location.href = "/dashboard";
+      navigate("/dashboard"); 
     },
     onError: (error) => {
-      if (error) {
-        alert(`Giriş başarısız: ${error || "Bir hata oluştu"}`);
-      } else {
-        alert("Giriş yapılamadı. Lütfen internet bağlantınızı kontrol edin.");
-      }
+      toast.error(`Giriş yapılamadı: ${error.message}`,{duration: 5000});
+      reset();
     },
   });
 
-  const onSubmit = (data: LoginData) => {
+  const onSubmit = async (data: LoginData) => {
     mutate(data);
   };
 

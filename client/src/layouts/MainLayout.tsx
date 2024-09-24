@@ -39,7 +39,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 </li>
               ) : (
                 <li>
-                  <Link to="/login" className="hover:underline">
+                  <Link to="/auth" className="hover:underline">
                     Login
                   </Link>
                 </li>
