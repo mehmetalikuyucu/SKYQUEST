@@ -40,8 +40,6 @@ export class CreateReservationDto {
   @IsArray()
   flightStates: string[];
 
-  @IsNotEmpty()
-  @IsNumber()
   terminal: number;
 
   @IsNotEmpty()

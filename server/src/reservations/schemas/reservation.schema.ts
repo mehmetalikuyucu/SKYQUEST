@@ -34,7 +34,7 @@ export class Reservation {
   @Prop({ type: [String], required: true })
   flightStates: string[];
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   terminal: number;
 
   @Prop({ type: Object, required: true })

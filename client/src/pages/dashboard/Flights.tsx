@@ -67,7 +67,25 @@ const Dashboard: React.FC = () => {
   const reserveMutation = useMutation<any, Error, Flight>({
     mutationFn: (flight: Flight) =>
       apiClient.post("/reservations", {
-        // ... (reservation data remains unchanged)
+        flightId: flight.id,
+        flightName: flight.flightName,
+        flightNumber: flight.flightNumber,
+        scheduleDateTime: flight.scheduleDateTime,
+        flightDirection: flight.flightDirection,
+        route: flight.route,
+        flightStates: flight.publicFlightState.flightStates,
+        terminal: flight.terminal,
+        aircraftType: {
+          iataMain: flight.aircraftType.iataMain,
+          iataSub: flight.aircraftType.iataSub,
+          longDescription: flight.aircraftTypeDetails.longDescription,
+          shortDescription: flight.aircraftTypeDetails.shortDescription,
+        },
+        destination: {
+          city: flight.destinationDetails.data.city,
+          country: flight.destinationDetails.data.country,
+          iata: flight.destinationDetails.data.iata,
+        },
       }),
     onSuccess: () => {
       toast.success("Reservation successful");
