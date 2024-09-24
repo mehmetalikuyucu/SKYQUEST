@@ -4,7 +4,7 @@ import routes, { RouteType } from "./routes";
 import MainLayout from "../layouts/MainLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
-
+import NotFound from "./components/NotFound";
 const Router: React.FC = () => {
   return (
     <BrowserRouter>
@@ -22,6 +22,7 @@ const Router: React.FC = () => {
             }
           />
         ))}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
