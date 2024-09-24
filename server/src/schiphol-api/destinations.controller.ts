@@ -9,6 +9,10 @@ export class DestinationsController {
   getDestinations(@Query() queryParams: any) {
     return this.destinationsService.getDestinations(queryParams);
   }
+  @Get('all')
+  getAllDestinations() {
+    return this.destinationsService.getAllDestinations();
+  }
 
   @Get(':iata')
   getDestinationByIata(@Param('iata') iata: string) {
