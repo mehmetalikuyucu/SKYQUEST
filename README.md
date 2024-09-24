@@ -1,4 +1,4 @@
-# Flight Information and Booking System
+# Flight Information and Booking System (SKYQUEST)
 
 This project is a comprehensive flight information and booking system using React for the frontend, NestJS for the backend, and MongoDB for the database.
 
@@ -14,6 +14,13 @@ This project is a comprehensive flight information and booking system using Reac
 
 - [Client README](./client/README.md)
 - [Server README](./server/README.md)
+## Project Images
+![Auth Page](./assets/auth.png)
+![Reservations Page](./assets/reservations.png)
+![Flights Page](./assets/flights.png)
+![404 Page](./assets/404.png)
+
+
 
 ## Prerequisites
 
