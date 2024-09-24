@@ -9,6 +9,10 @@ export class FlightsController {
   getFlights(@Query() queryParams: any) {
     return this.flightsService.getFlights(queryParams);
   }
+  @Get('getFlightsWithDetails')
+  getFlightsWithDetails(@Query() queryParams: any) {
+    return this.flightsService.getFlightsWithDetails(queryParams);
+  }
 
   @Get(':id')
   getFlightById(@Param('id') id: string) {
