@@ -10,19 +10,47 @@ export class Reservation {
   user: User;
 
   @Prop({ required: true })
-  flightNumber: string;
+  flightId: string;
 
   @Prop({ required: true })
-  departureDate: Date;
+  flightName: string;
 
   @Prop({ required: true })
-  arrivalDate: Date;
+  flightNumber: number;
 
   @Prop({ required: true })
-  origin: string;
+  scheduleDateTime: Date;
 
   @Prop({ required: true })
-  destination: string;
+  flightDirection: string;
+
+  @Prop({ type: Object, required: true })
+  route: {
+    destinations: string[];
+    eu: string;
+    visa: boolean;
+  };
+
+  @Prop({ type: [String], required: true })
+  flightStates: string[];
+
+  @Prop({ required: true })
+  terminal: number;
+
+  @Prop({ type: Object, required: true })
+  aircraftType: {
+    iataMain: string;
+    iataSub: string;
+    longDescription: string;
+    shortDescription: string;
+  };
+
+  @Prop({ type: Object, required: true })
+  destination: {
+    city: string;
+    country: string;
+    iata: string;
+  };
 
   @Prop({ default: Date.now })
   createdAt: Date;

@@ -1,23 +1,63 @@
-import { IsNotEmpty, IsString, IsDateString, IsISO8601 } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  IsNumber,
+  IsDateString,
+  IsObject,
+  IsArray,
+} from 'class-validator';
 
 export class CreateReservationDto {
   @IsNotEmpty()
   @IsString()
-  flightNumber: string;
-
-  @IsNotEmpty()
-  @IsDateString()
-  departureDate: string;
-
-  @IsNotEmpty()
-  @IsDateString()
-  arrivalDate: string;
+  flightId: string;
 
   @IsNotEmpty()
   @IsString()
-  origin: string;
+  flightName: string;
+
+  @IsNotEmpty()
+  @IsNumber()
+  flightNumber: number;
+
+  @IsNotEmpty()
+  @IsDateString()
+  scheduleDateTime: string;
 
   @IsNotEmpty()
   @IsString()
-  destination: string;
+  flightDirection: string;
+
+  @IsNotEmpty()
+  @IsObject()
+  route: {
+    destinations: string[];
+    eu: string;
+    visa: boolean;
+  };
+
+  @IsNotEmpty()
+  @IsArray()
+  flightStates: string[];
+
+  @IsNotEmpty()
+  @IsNumber()
+  terminal: number;
+
+  @IsNotEmpty()
+  @IsObject()
+  aircraftType: {
+    iataMain: string;
+    iataSub: string;
+    longDescription: string;
+    shortDescription: string;
+  };
+
+  @IsNotEmpty()
+  @IsObject()
+  destination: {
+    city: string;
+    country: string;
+    iata: string;
+  };
 }
