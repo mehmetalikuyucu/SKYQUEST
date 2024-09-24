@@ -24,7 +24,7 @@ export class FlightsService extends BaseApiService {
   ): Observable<{ data: { flights: Flight[] }; pagination: any }> {
     return this.makeRequest('flights', params);
   }
-
+  // getFlightsWithDetails function is used to get flights with additional details such as destination details and aircraft type details.
   getFlightsWithDetails(
     params: any,
   ): Observable<{ data: any[]; pagination: any }> {
